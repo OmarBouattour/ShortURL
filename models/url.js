@@ -8,10 +8,12 @@ const URLSchema = new Schema({
     urlCode: String,
     longUrl: String,
     shortUrl: String,
+    count:{ type: Number, default: 1 },
     date: {
         type: String,
         default: Date.now
     }
+    
 });
 
 

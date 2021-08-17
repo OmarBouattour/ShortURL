@@ -21,10 +21,12 @@ router.post('/shorten', async (req, res) => {
   // Check long url
   if (validUrl.isUri(longUrl)) {
     try {
-      let url = await Url.findOne({ longUrl });
+      let url = await Url.findOneAndUpdate({ longUrl }, {$inc: { count: 1} });
+
 
       if (url) {
         res.json(url);
+        
       } else {
         const shortUrl = baseUrl + '/' + urlCode;
 
@@ -32,6 +34,7 @@ router.post('/shorten', async (req, res) => {
           longUrl,
           shortUrl,
           urlCode,
+          count,
           date: new Date()
         });
 
@@ -51,7 +54,7 @@ router.post('/shorten', async (req, res) => {
 router.get('/', (req, res) => {
     Url.find({},(err, docs) => {
         if (!err) { res.send(docs); }
-        else { console.log('Error in Retriving Test Case :' + JSON.stringify(err, undefined, 2)); }
+        else { console.log('Error in Retriving url :' + JSON.stringify(err, undefined, 2)); }
     });
 });
 

@@ -10,11 +10,11 @@ export class AuthService {
   constructor(private http: HttpClient,
     private _router: Router) { }
 
-    private _loginUrl = "http://localhost:7777/api/login";
-    private _registerUrl = "http://localhost:7777/api/register";
-    private _shortenurl = "http://localhost:7777/api/url/shorten";
-    private _url = "http://localhost:7777/api/url/last";
-    private _stats = "http://localhost:7777/api/url/";
+    private _loginUrl = "/api/login";
+    private _registerUrl = "/api/register";
+    private _shortenurl = "/api/url/shorten";
+    private _url = "/api/url/last";
+    private _stats = "/api/url/";
 
     loginUser(user) {
       return this.http.post<any>(this._loginUrl, user)
